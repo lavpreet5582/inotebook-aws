@@ -1,0 +1,175 @@
+# version: '3'
+
+# services:
+#   # frontend:
+#   #   container_name: inotebook-frontend
+#   #   build:
+#   #     context: ./inotebook
+#   #   volumes:
+#   #     - react_build:/react/build
+#   #   ports:
+#   #     - 3000:80
+
+#   backend:
+#     build:
+#       context: ./Django-backend/INotebookBackend
+#     ports:
+#       - 8000:8000
+#     environment:
+#       - DEBUG=True
+#     depends_on:
+#       - db
+  
+#   nginx:
+#     image: nginx:1.25.1-alpine
+#     container_name: inotebook-nginx
+#     ports:
+#       - 80:80
+#     volumes:
+#       - ./nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
+#       # - react_build:/var/www/react
+#     depends_on:
+#       - backend
+#       # - frontend
+
+#   db:
+#     image: postgres:15-alpine
+#     environment:
+#       - POSTGRES_USER=lavpreet
+#       - POSTGRES_PASSWORD=Test@123
+#       - POSTGRES_DB=testdb1
+#     ports:
+#       - "5432:5432"
+
+
+
+# new file
+
+
+# Perfectly working for backend and db
+# version: '3'
+# services:
+#   db:
+#     image: postgres:15-alpine
+#     environment:
+#       - POSTGRES_USER=lavpreet
+#       - POSTGRES_PASSWORD=Test@123
+#       - POSTGRES_DB=testdb1
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+#   web:
+#     build:
+#       context: ./Django-backend/iNotebookBackend
+#     env_file:
+#       - ./Django-backend/iNotebookBackend/.env
+#     command: >
+#       sh -c " python manage.py migrate &&
+#       python manage.py runserver 0.0.0.0:8000"
+#     ports:
+#       - 8000:8000
+
+# volumes:
+#   db_data:
+
+
+
+
+# New config'
+
+
+# version: "3"
+# services:
+#   client:
+#     build:
+#       context: ./inotebook
+#     restart: always
+#     ports:
+#       - "3000:80"
+
+#   backend:
+#     build:
+#       context: ./Django-backend/iNotebookBackend
+#     env_file:
+#       - ./Django-backend/iNotebookBackend/.env
+#     # command: >
+#     #   sh -c " python manage.py migrate &&
+#     #   python manage.py runserver 0.0.0.0:8000"
+#     entrypoint: /entrypoint.sh
+#     restart: always
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - db
+
+#   db:
+#     image: postgres:15-alpine
+#     environment:
+#       POSTGRES_USER: lavpreet
+#       POSTGRES_PASSWORD: Test@123
+#       POSTGRES_DB: testdb1
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+
+#   nginx:
+#     image: nginx:alpine
+#     volumes:
+#       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+#     ports:
+#       - "80:80"
+#     restart: always
+#     depends_on:
+#       - client
+#       - backend
+
+# volumes:
+#   db_data:
+
+
+  # worker_processes 1;
+
+# events {
+#   worker_connections 1024;
+# }
+
+# http {
+#   server {
+#     listen 80;
+#     server_name localhost;
+
+#     location / {
+#       proxy_pass http://react-app:3000;
+#       proxy_set_header Host $host;
+#       proxy_set_header X-Real-IP $remote_addr;
+#       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#       proxy_set_header X-Forwarded-Proto $scheme;
+#     }
+#   }
+# }
+
+version: "3"
+services:
+  client:
+    image: "love28856/inotebook-react"
+    mem_limit: 128m
+    hostname: client
+  backend:
+    image: "love28856/inotebook-django"
+    mem_limit: 128m
+    hostname: backend
+    command: >
+      sh -c " python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000"
+    entrypoint: /entrypoint.sh
+    restart: always
+    environment:
+      - PGUSER=$PGUSER
+      - PGHOST=$PGHOST
+      - PGDATABASE=$PGDATABASE
+      - PGPASSWORD=$PGPASSWORD
+      - PGPORT=$PGPORT
+  nginx:
+    image: "love28856/inotebook-nginx"
+    mem_limit: 128m
+    hostname: nginx
+    ports:
+      - "80:80"
