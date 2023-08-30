@@ -149,11 +149,11 @@
 version: "3"
 services:
   client:
-    image: "love28856/inotebook-react"
+    image: "love28856/inotebook-client"
     mem_limit: 128m
     hostname: client
   backend:
-    image: "love28856/inotebook-django"
+    image: "love28856/inotebook-server"
     mem_limit: 128m
     hostname: backend
     command: >
