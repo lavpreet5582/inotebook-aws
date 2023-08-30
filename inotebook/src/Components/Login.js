@@ -7,13 +7,14 @@ export const Login = (props) => {
     email: "",
     password: "",
   });
+  const host = window.location.origin;
 
   let navigate = useNavigate();
   //   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `http://localhost:8000/accounts/user/login/`;
+  const url = `${host}/accounts/user/login/`;
     const response = await fetch(url, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {

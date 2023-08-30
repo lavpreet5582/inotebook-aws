@@ -2,7 +2,8 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NotesState = (props) => {
-  const host = "http://localhost:8000";
+  const host = window.location.origin;
+  console.log(host);
   const [notes, setNotes] = useState([]);
   const user = localStorage.getItem('user')
   const token ="Bearer " +  user
