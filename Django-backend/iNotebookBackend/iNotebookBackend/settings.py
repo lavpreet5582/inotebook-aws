@@ -91,7 +91,6 @@ ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    '*'
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -99,7 +98,6 @@ CORS_ORIGIN_WHITELIST = (
     'http://192.168.0.50:3000',  # for network 
     'http://localhost:8080',  # for localhost (Developlemt)
     'http://192.168.0.50:8080',  # for network (Development)
-    "*"
 )
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -107,9 +105,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': env.db()
-# }
+DATABASES = {
+    'default': env.db()
+}
 
 # DATABASES = {
 #     'default': {
@@ -122,17 +120,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #     }
 # }
 
-import os
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get('PGDATABASE'),
-        "USER": os.environ.get('PGUSER'),
-        "PASSWORD": os.environ.get('PGPASSWORD'),
-        "HOST": os.environ.get('PGHOST'),
-        "PORT": os.environ.get('PGPORT'),
-    }
-}
+# import os
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get('PGDATABASE'),
+#         "USER": os.environ.get('PGUSER'),
+#         "PASSWORD": os.environ.get('PGPASSWORD'),
+#         "HOST": os.environ.get('PGHOST'),
+#         "PORT": os.environ.get('PGPORT'),
+#     }
+# }
 
 
 # Password validation

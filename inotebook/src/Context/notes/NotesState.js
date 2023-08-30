@@ -2,7 +2,7 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NotesState = (props) => {
-  const host = window.location.origin;
+  const host = window.location.origin + '/api';
   console.log(host);
   const [notes, setNotes] = useState([]);
   const user = localStorage.getItem('user')

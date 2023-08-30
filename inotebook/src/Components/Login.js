@@ -7,7 +7,7 @@ export const Login = (props) => {
     email: "",
     password: "",
   });
-  const host = window.location.origin;
+  const host = window.location.origin + '/api';
 
   let navigate = useNavigate();
   //   const [password, setPassword] = useState("");

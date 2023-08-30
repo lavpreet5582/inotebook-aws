@@ -77,52 +77,54 @@
 # New config'
 
 
-# version: "3"
-# services:
-#   client:
-#     build:
-#       context: ./inotebook
-#     restart: always
-#     ports:
-#       - "3000:80"
+version: "3"
+services:
+  client:
+    build:
+      context: ./inotebook
+    restart: always
+    hostname: client
+    ports:
+      - "3000:80"
 
-#   backend:
-#     build:
-#       context: ./Django-backend/iNotebookBackend
-#     env_file:
-#       - ./Django-backend/iNotebookBackend/.env
-#     # command: >
-#     #   sh -c " python manage.py migrate &&
-#     #   python manage.py runserver 0.0.0.0:8000"
-#     entrypoint: /entrypoint.sh
-#     restart: always
-#     ports:
-#       - "8000:8000"
-#     depends_on:
-#       - db
+  backend:
+    build:
+      context: ./Django-backend/iNotebookBackend
+    env_file:
+      - ./Django-backend/iNotebookBackend/.env
+    command: >
+      sh -c " python manage.py migrate
+      # python manage.py runserver 0.0.0.0:8000"
+    entrypoint: /entrypoint.sh
+    restart: always
+    hostname: backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
 
-#   db:
-#     image: postgres:15-alpine
-#     environment:
-#       POSTGRES_USER: lavpreet
-#       POSTGRES_PASSWORD: Test@123
-#       POSTGRES_DB: testdb1
-#     volumes:
-#       - db_data:/var/lib/postgresql/data
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: lavpreet
+      POSTGRES_PASSWORD: Test@123
+      POSTGRES_DB: testdb1
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
-#   nginx:
-#     image: nginx:alpine
-#     volumes:
-#       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-#     ports:
-#       - "80:80"
-#     restart: always
-#     depends_on:
-#       - client
-#       - backend
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - client
+      - backend
 
-# volumes:
-#   db_data:
+volumes:
+  db_data:
 
 
   # worker_processes 1;
@@ -146,30 +148,30 @@
 #   }
 # }
 
-version: "3"
-services:
-  client:
-    image: "love28856/inotebook-client"
-    mem_limit: 128m
-    hostname: client
-  backend:
-    image: "love28856/inotebook-server"
-    mem_limit: 128m
-    hostname: backend
-    command: >
-      sh -c " python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000"
-    entrypoint: /entrypoint.sh
-    restart: always
-    environment:
-      - PGUSER=$PGUSER
-      - PGHOST=$PGHOST
-      - PGDATABASE=$PGDATABASE
-      - PGPASSWORD=$PGPASSWORD
-      - PGPORT=$PGPORT
-  nginx:
-    image: "love28856/inotebook-nginx"
-    mem_limit: 128m
-    hostname: nginx
-    ports:
-      - "80:80"
+# version: "3"
+# services:
+#   client:
+#     image: "love28856/inotebook-client"
+#     mem_limit: 128m
+#     hostname: client
+#   backend:
+#     image: "love28856/inotebook-server"
+#     mem_limit: 128m
+#     hostname: backend
+#     command: >
+#       sh -c " python manage.py migrate &&
+#       python manage.py runserver 0.0.0.0:8000"
+#     entrypoint: /entrypoint.sh
+#     restart: always
+#     environment:
+#       - PGUSER=$PGUSER
+#       - PGHOST=$PGHOST
+#       - PGDATABASE=$PGDATABASE
+#       - PGPASSWORD=$PGPASSWORD
+#       - PGPORT=$PGPORT
+#   nginx:
+#     image: "love28856/inotebook-nginx"
+#     mem_limit: 128m
+#     hostname: nginx
+#     ports:
+#       - "80:80"
