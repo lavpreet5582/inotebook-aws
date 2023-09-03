@@ -88,22 +88,21 @@ WSGI_APPLICATION = 'iNotebookBackend.wsgi.application'
 
 
 ALLOWED_HOSTS=['*']
-CORS_ORIGIN_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-#     '*'
-# ]
+CORS_ORIGIN_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com'
+]
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000',  # for localhost (REACT Default)
-#     'http://192.168.0.50:3000',  # for network 
-#     'http://localhost:8080',  # for localhost (Developlemt)
-#     'http://192.168.0.50:8080',  # for network (Development)
-#     # 'http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com'
-#     '*'
-# )
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',  # for localhost (REACT Default)
+    'http://192.168.0.50:3000',  # for network 
+    'http://localhost:8080',  # for localhost (Developlemt)
+    'http://192.168.0.50:8080',  # for network (Development)
+    'http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com'
+)
 
-CSRF_TRUSTED_ORIGINS = ['http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com']
+CSRF_TRUSTED_ORIGINS = ['http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com', 'http://localhost:3000','http://localhost']
 
 CORS_ALLOW_CREDENTIALS = True
 
