@@ -103,6 +103,8 @@ CORS_ORIGIN_ALLOW_ALL_ORIGINS = True
 #     '*'
 # )
 
+CSRF_TRUSTED_ORIGINS = ['http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com']
+
 CORS_ALLOW_CREDENTIALS = True
 
 STATIC_URL = '/static/'
