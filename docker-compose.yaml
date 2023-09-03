@@ -158,8 +158,8 @@ services:
     image: "love28856/inotebook-server"
     mem_limit: 128m
     hostname: backend
-    command: >
-      sh -c " python manage.py migrate
+    # command: >
+      # sh -c " python manage.py migrate
       # python manage.py runserver 0.0.0.0:8000"
     entrypoint: /entrypoint.sh
     restart: always
