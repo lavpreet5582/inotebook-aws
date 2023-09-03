@@ -105,9 +105,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': env.db()
-}
+# DATABASES = {
+#     'default': env.db()
+# }
 
 # DATABASES = {
 #     'default': {
@@ -120,17 +120,17 @@ DATABASES = {
 #     }
 # }
 
-# import os
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ.get('PGDATABASE'),
-#         "USER": os.environ.get('PGUSER'),
-#         "PASSWORD": os.environ.get('PGPASSWORD'),
-#         "HOST": os.environ.get('PGHOST'),
-#         "PORT": os.environ.get('PGPORT'),
-#     }
-# }
+import os
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get('PGDATABASE'),
+        "USER": os.environ.get('PGUSER'),
+        "PASSWORD": os.environ.get('PGPASSWORD'),
+        "HOST": os.environ.get('PGHOST'),
+        "PORT": os.environ.get('PGPORT'),
+    }
+}
 
 
 # Password validation
