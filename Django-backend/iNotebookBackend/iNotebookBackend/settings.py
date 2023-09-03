@@ -101,7 +101,7 @@ CORS_ORIGIN_ALLOW_ALL_ORIGINS = True
 #     'http://192.168.0.50:8080',  # for network (Development)
 #     # 'http://inotebook-app-env-1.eba-95ccsx7m.ap-south-1.elasticbeanstalk.com'
 #     '*'
-)
+# )
 
 CORS_ALLOW_CREDENTIALS = True
 
